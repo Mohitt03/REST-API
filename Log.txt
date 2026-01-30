@@ -1,0 +1,38 @@
+Method:- GET, URL:- /student/
+Method:- GET, URL:- /student/
+Method:- GET, URL:- /student/ Date:- function now() { [native code] }
+Date:- 30/1/2026, 11:28:50 am Method:- GET, URL:- /student/
+Date:- 30/1/2026, 11:29:49 am, Method:- GET, URL:- /student/
+Date:- 30/1/2026, 11:37:01 am, Method:- POST, URL:- /student/post
+Date:- 30/1/2026, 11:37:09 am, Method:- POST, URL:- /student/post
+Date:- 30/1/2026, 11:38:20 am, Method:- POST, URL:- /student/post
+Date:- 30/1/2026, 11:38:24 am, Method:- POST, URL:- /student/post
+Date:- 30/1/2026, 11:38:28 am, Method:- GET, URL:- /student/
+Date:- 30/1/2026, 11:40:38 am, Method:- POST, URL:- /student/post
+Date:- 30/1/2026, 11:44:29 am, Method:- GET, URL:- /student/?name:V
+Date:- 30/1/2026, 11:44:36 am, Method:- GET, URL:- /student/?name:M
+Date:- 30/1/2026, 11:44:42 am, Method:- GET, URL:- /student/?name:M
+Date:- 30/1/2026, 10:42:11 pm, Method:- GET, URL:- /student/?name:M
+Date:- 30/1/2026, 10:42:17 pm, Method:- GET, URL:- /student/?name:Vinit
+Date:- 30/1/2026, 10:43:03 pm, Method:- GET, URL:- /student/?name:Mohit
+Date:- 30/1/2026, 10:45:52 pm, Method:- GET, URL:- /student/?name:Mohit
+Date:- 30/1/2026, 10:46:20 pm, Method:- GET, URL:- /student?name:Mohit
+Date:- 30/1/2026, 10:46:22 pm, Method:- GET, URL:- /student?name:Mohit
+Date:- 30/1/2026, 10:46:38 pm, Method:- GET, URL:- /student?name=Mohit
+Date:- 30/1/2026, 10:46:43 pm, Method:- GET, URL:- /student?name=Vinit
+Date:- 30/1/2026, 10:46:49 pm, Method:- GET, URL:- /student?name=M
+Date:- 30/1/2026, 10:47:15 pm, Method:- GET, URL:- /student?name=M
+Date:- 30/1/2026, 10:47:38 pm, Method:- GET, URL:- /student?name=M
+Date:- 30/1/2026, 10:47:57 pm, Method:- GET, URL:- /student?name=M
+Date:- 30/1/2026, 10:48:15 pm, Method:- GET, URL:- /student?name=M
+Date:- 30/1/2026, 10:49:29 pm, Method:- GET, URL:- /student?name=M
+Date:- 30/1/2026, 10:49:48 pm, Method:- GET, URL:- /search?name=M
+Date:- 30/1/2026, 10:50:02 pm, Method:- GET, URL:- /search?name=Vinit
+Date:- 30/1/2026, 10:50:32 pm, Method:- GET, URL:- /student/search?name=Vinit
+Date:- 30/1/2026, 10:51:27 pm, Method:- GET, URL:- /student/search?name=Mohit
+Date:- 30/1/2026, 10:52:46 pm, Method:- GET, URL:- /student/search?name=Mohit
+Date:- 30/1/2026, 10:55:21 pm, Method:- GET, URL:- /student/search?name=Mohit
+Date:- 30/1/2026, 10:55:35 pm, Method:- GET, URL:- /student/search?name=V
+Date:- 30/1/2026, 10:55:40 pm, Method:- GET, URL:- /student/search?name=I
+Date:- 30/1/2026, 10:55:43 pm, Method:- GET, URL:- /student/search?name=t
+Date:- 30/1/2026, 10:55:47 pm, Method:- GET, URL:- /student/search?name=Mohit
