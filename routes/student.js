@@ -13,7 +13,7 @@ router.get('/search', async (req, res) => {
         }
 
         const students = await Student.find({
-            name: { $regex: name, $options: 'i' } // case-insensitive search
+            name: { $regex: name, $options: 'i' } // case-insensitive searching
         });
 
         res.status(200).json(students);
@@ -64,12 +64,12 @@ router.post('/post', async (req, res) => {
             return res.status(400).json({ error: "Invalid email address" })
         }
 
-        const existEmail = await Student.find({ email: email })
+        const existEmail = await Student.findOne({ email })
+
         if (existEmail) {
             return res.status(400).json({ error: "Email Already Exists" })
         }
 
-        console.log(data);
         const response = await Student.create(req.body)
 
         res.status(200).json({ message: 'File uploaded successfully' });
