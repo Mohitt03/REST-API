@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const fs = require('fs')
 const app = express();
 
-
+// const log = require('../log/route.log.txt')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }))
 function logger(req, res, next) {
     // Date.now
     const log = `Date:- ${new Date().toLocaleString()}, Method:- ${req.method}, URL:- ${req.url}\n`
-    fs.appendFile('./Log.txt', log, (err) => {
+    fs.appendFile('../log/route.log.txt', log, (err) => {
         if (err) {
             console.log(err);
 
@@ -25,13 +25,11 @@ app.use(logger);
 
 
 
-const StudentSchema = require("./models/Student")
-const StudentRoutes = require("./routes/student")
+const StudentSchema = require("./models/student.model")
+const StudentRoutes = require("./routes/student.route")
+const AuthRoutes = require("./routes/auth.route")
 
 app.use('/student', StudentRoutes)
-app.get('/test', (req, res) => {
-    console.log(req.headers);
-    res.json(req.headers)
-})
+app.use('/auth', AuthRoutes)
 
 module.exports = app;

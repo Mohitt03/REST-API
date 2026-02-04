@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
-const Student = require('../models/Student');
-
+const Student = require('../models/student.model');
+const protectedRouter = require('../middleware/auth.middleware')
 
 
 router.get('/search', async (req, res) => {
@@ -26,7 +26,7 @@ router.get('/search', async (req, res) => {
 
 
 //Get all Document
-router.get('/', async (req, res) => {
+router.get('/', protectedRouter, async (req, res) => {
     try {
 
         const response = await Student.find()
