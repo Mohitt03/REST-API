@@ -3,7 +3,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const fs = require('fs')
 const app = express();
-
+const errorHandler = require('./middlewares/errorHandler.middleware')
 // const log = require('../log/route.log.txt')
 
 app.use(express.json())
@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }))
 function logger(req, res, next) {
     // Date.now
     const log = `Date:- ${new Date().toLocaleString()}, Method:- ${req.method}, URL:- ${req.url}\n`
-    fs.appendFile('../log/route.log.txt', log, (err) => {
+    fs.appendFile('D:/student-crud/log/route.log.txt', log, (err) => {
         if (err) {
             console.log(err);
 
@@ -31,5 +31,8 @@ const AuthRoutes = require("./routes/auth.route")
 
 app.use('/student', StudentRoutes)
 app.use('/auth', AuthRoutes)
+
+//Error Handler
+app.use(errorHandler);
 
 module.exports = app;

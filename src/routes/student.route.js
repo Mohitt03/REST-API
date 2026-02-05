@@ -1,8 +1,10 @@
 const express = require("express")
 const router = express.Router();
 const Student = require('../models/student.model');
-const protectedRouter = require('../middleware/auth.middleware')
+const protectedRouter = require('../middlewares/auth.middleware')
 
+//Protecte All the routes
+router.use(protectedRouter)
 
 router.get('/search', async (req, res) => {
     try {
@@ -26,7 +28,7 @@ router.get('/search', async (req, res) => {
 
 
 //Get all Document
-router.get('/', protectedRouter, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
 
         const response = await Student.find()
@@ -43,7 +45,9 @@ router.get('/:id', async (req, res) => {
     try {
 
         const id = req.params.id;
+        
         const response = await Student.findById(id)
+        console.log(response);
 
         res.status(200).json({ Data: response, message: 'Succesfull' });
     } catch (error) {
