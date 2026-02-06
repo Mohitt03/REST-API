@@ -2,6 +2,9 @@ const express = require("express")
 const router = express.Router();
 const Student = require('../models/student.model');
 const protectedRouter = require('../middlewares/auth.middleware')
+const studValidation = require('../middlewares/studentValidation')
+const ApiError = require('../utils/ApiError')
+const ApiResponse = require('../utils/ApiResponse')
 
 //Protecte All the routes
 router.use(protectedRouter)
@@ -11,7 +14,9 @@ router.get('/search', async (req, res) => {
         const { name } = req.query;
 
         if (!name) {
-            return res.status(400).json({ message: "Name is required" });
+            // return res.status(400).json({ message: "Name is required" });
+            throw new ApiError(400, "Name is required")
+
         }
 
         const students = await Student.find({
@@ -21,7 +26,7 @@ router.get('/search', async (req, res) => {
         res.status(200).json(students);
 
     } catch (error) {
-        res.status(500).json({ message: "Error", error: error.message });
+        throw new ApiError(500, "Something Went Wrong")
     }
 });
 
@@ -36,7 +41,7 @@ router.get('/', async (req, res) => {
         res.status(200).json({ Data: response, message: 'Succesfull' });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Error getting files', error: error.message });
+        throw new ApiError(500, "Error getting files")
     }
 })
 
@@ -45,33 +50,28 @@ router.get('/:id', async (req, res) => {
     try {
 
         const id = req.params.id;
-        
+
         const response = await Student.findById(id)
         console.log(response);
 
         res.status(200).json({ Data: response, message: 'Succesfull' });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'Error getting files', error: error.message });
+        throw new ApiError(500, "Error getting files")
     }
 })
 
 //Creating new Document
-router.post('/post', async (req, res) => {
+router.post('/post', studValidation, async (req, res, next) => {
     try {
 
         const data = req.body;
         const { email } = req.body;
-
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!regex.test(email)) {
-            return res.status(400).json({ error: "Invalid email address" })
-        }
-
         const existEmail = await Student.findOne({ email })
 
-        if (existEmail) {
-            return res.status(400).json({ error: "Email Already Exists" })
+        if (existEmail != null) {
+            console.log(existEmail);
+            throw new ApiError(400, "Email already exists")
+
         }
 
         const response = await Student.create(req.body)
@@ -79,10 +79,7 @@ router.post('/post', async (req, res) => {
         res.status(200).json({ message: 'File uploaded successfully' });
 
     } catch (error) {
-
-        console.log(error);
-        res.status(500).json({ message: 'Error', error: error.message });
-
+        next(error);
     }
 })
 
@@ -99,29 +96,10 @@ router.put('/put/:id', async (req, res) => {
         res.status(200).json({ Data: response, message: 'File Updated Sccesfull' });
 
     } catch (error) {
-
-        console.log(error);
-        res.status(500).json({ message: 'Error', error: error.message });
-
+        throw new ApiError(500, "Error updating student")
     }
 })
 
-//Deleting All Doument
-router.delete('/deleteAll', async (req, res) => {
-    try {
-
-
-        const response = await Student.deleteMany()
-
-        res.status(200).json({ message: 'Files Deleted successfully' });
-
-    } catch (error) {
-
-        console.log(error);
-        res.status(500).json({ message: 'Error', error: error.message });
-
-    }
-})
 
 //Delete By Id
 router.delete('/delete/:id', async (req, res) => {
@@ -133,10 +111,7 @@ router.delete('/delete/:id', async (req, res) => {
         res.status(200).json({ message: 'File Deleted successfully' });
 
     } catch (error) {
-
-        console.log(error);
-        res.status(500).json({ message: 'Error', error: error.message });
-
+        throw new ApiError(500, "Error deleting files")
     }
 })
 
