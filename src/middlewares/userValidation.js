@@ -2,12 +2,15 @@ const Joi = require('joi');
 const ApiError = require('../utils/ApiError')
 
 const userValidation = (req, res, next) => {
-    const { username, email, password, } = req.body;
+    const { username, age, course, email, password, } = req.body;
     const userInfo = {
         username,
         email,
-        password
+        password,
+        age,
+        course
     }
+
 
     const schema = Joi.object({
         username: Joi.string()
@@ -15,17 +18,31 @@ const userValidation = (req, res, next) => {
             .max(30)
             .required(),
 
+        age: Joi.number()
+            .integer()
+            .min(10)
+            .required(),
+
+        course: Joi.string()
+            .trim()
+            .required(),
+
         password: Joi.string()
             .min(8)
-            .max(15),
+            .max(15)
+            .required(),
 
         email: Joi.string()
-            .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
-    })
+            .email()
+            .required()
+    });
+
 
     const { error } = schema.validate(userInfo);
     if (error) {
         // return res.status(501).json({error: error.details[0].message});
+        console.log(error);
+
         throw new ApiError(422, error.details[0].message)
 
     };

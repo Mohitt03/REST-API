@@ -1,7 +1,7 @@
 const ApiError = require("../utils/ApiError.js");
 const asyncHandler = require("../utils/asyncHandler.js");
 const jwt = require("jsonwebtoken")
-const User = require("../models/user.model.js");
+const Student = require("../models/student.model.js");
 
 const verifyJWT = asyncHandler(async (req, _, next) => {
     try {
@@ -14,7 +14,7 @@ const verifyJWT = asyncHandler(async (req, _, next) => {
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
 
 
-        const user = await User.findById(decodedToken?._id).select("-password -refreshToken")
+        const user = await Student.findById(decodedToken?._id).select("-password -refreshToken")
 
         if (!user) {
 
